@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <title>Template Engine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style type="text/css">
+      .container {
+        max-width: 800px;
+        padding-top: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Encode Assignment</a>
+    </div>
+
+</nav>
+    <div class="container">
+      
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Statistics Table</div>
+        
+
+        <!-- Table -->
+        <table class="table table-responsive">
+          {% for item in myexportlist %}
+             {% for key, value in item.items() %}
+                {%  if key == 'comments' %}     
+                  <tr><th>Answer</th><th># Comments</th></tr>   
+                  {% for v in value %}
+                    <tr><td><a href=http://stackoverflow.com/a/{{v["answerid"]}} target="_blank">{{v["answerid"]}}</a></td><td>{{v["sum"]}} comments</td></tr>
+                  {% endfor %}
+                {% elif key=='avg_score' %}
+                  <tr><th>Average Score</th>
+                  <td>{{value}}</td></tr>
+                {% elif key=='avg_answer_count_pq' %}
+                  <tr><th>Average answer count per question</th>
+                  <td>{{value}}</td></tr>
+                {% else %}
+                  <tr><th>Number of accepted answers</th>
+                  <td>{{value}}</td></tr>
+                {% endif %}
+             {% endfor %}
+          {% endfor %}
+      </div>
+      
+    </div>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
